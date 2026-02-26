@@ -1,6 +1,6 @@
 ---
 name: mcu-debug
-description: MCU 项目调试助手，自动分析编译错误并提供修复方案。当用户发送 "fix"、"修复"、"build"、"编译" 或任何 MCU 编译命令时触发，适用于嵌入式开发、Arduino、ESP32、STM32、SF32 (SiFli) 等 MCU 项目的编译问题诊断和修复。
+description: MCU 项目调试助手，自动分析编译错误并提供修复方案。适用于 Arduino、ESP32、STM32、SiFli (SF32) 等 MCU 项目的编译问题诊断和修复。
 ---
 
 # MCU Debug

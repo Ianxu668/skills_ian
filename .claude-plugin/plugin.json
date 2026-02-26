@@ -1,9 +1,12 @@
 {
-    "name": "ian_cc_plugin:mcu_debug",
-    "displayName": "MCU Debug",
-    "description": "MCU 项目调试助手，自动分析编译错误并提供修复方案。支持 Arduino、ESP32、STM32、SiFli (SF32) 等 MCU 项目。",
-    "version": "1.0.0",
-    "category": "development",
-    "tags": ["mcu", "embedded", "debug", "compile", "esp32", "stm32", "sifli", "arduino"],
-    "skills": ["mcu-debug"]
-  }
+  "name": "ian-cc-plugin",
+  "displayName": "Ian's CC Plugin",
+  "description": "个人 Claude Code 插件集合：MCU 调试助手、智能硬件产品调研分析",
+  "version": "1.0.0",
+  "author": {
+    "name": "Ian Xu"
+  },
+  "category": "development",
+  "tags": ["mcu", "embedded", "debug", "research", "hardware"],
+  "skills": ["./skills/"]
+}
