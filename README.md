@@ -1,41 +1,201 @@
-# Ian CC Plugin
+# Ian 插件先用起来 + Marketplace 教程
 
-个人 Claude Code 插件市场，收录实用的开发辅助技能。
+## 本工程结构
 
-## 安装
+本仓库是一个本地插件市场工程，核心结构如下：
+
+```text
+ian-cc-plugin/
+├── .claude-plugin/
+│   └── marketplace.json                # 市场配置（市场名、插件列表、插件路径）
+├── plugins/
+│   └── ian-plugins/
+│       ├── .claude-plugin/
+│       │   └── plugin.json             # 插件配置（插件名、版本、描述）
+│       └── skills/
+│           ├── smart-hardware-research/
+│           │   └── SKILL.md            # Skill 定义
+│           └── competitive-analysis/
+│               └── SKILL.md            # Skill 定义
+└── README.md
+```
+
+配置关系说明：
+- `.claude-plugin/marketplace.json` 定义市场 `ian-plugins`，并声明插件来源 `./plugins/ian-plugins`
+- `plugins/ian-plugins/.claude-plugin/plugin.json` 定义插件 `ian-plugins`
+- `plugins/ian-plugins/skills/*/SKILL.md` 是插件内可调用的 skills
+
+## 先安装并使用当前仓库插件
+
+当前仓库的配置为：
+- marketplace 名称：`ian-plugins`
+- plugin 名称：`ian-plugins`
+- 已包含 skills：`smart-hardware-research`、`competitive-analysis`
+
+### 1. 安装
 
 在 Claude Code 中执行：
 
 ```bash
-# 1. 添加 marketplace
 /plugin marketplace add ~/ian-cc-plugin
-
-# 2. 安装插件
-/plugin install ian-tools@ian-plugins
+/plugin install ian-plugins@ian-plugins
 ```
 
-## 使用
+### 2. 使用
 
-安装成功后，通过 `插件名:技能名` 调用：
+安装后可直接调用：
 
+```text
+/ian-plugins:smart-hardware-research
+/ian-plugins:competitive-analysis
 ```
-/ian-tools:smart-hardware-research 智能药盒
-/ian-tools:mcu-debug
+
+## Marketplace 教程（分开写）
+
+下面将两个不同场景拆分为两个独立教程：
+- 教程 A：一个插件包含两个 skills（整体安装）
+- 教程 B：两个 skills 分别做成两个插件（可单独安装）
+
+## 教程 A：一个插件包含两个 Skills
+
+适用场景：希望用户安装一次插件后直接获得两个 skills。
+
+### 1. 目录结构
+
+```text
+my-marketplace/
+├── .claude-plugin/
+│   └── marketplace.json
+└── plugins/
+    └── my-plugin/
+        ├── .claude-plugin/
+        │   └── plugin.json
+        └── skills/
+            ├── skill-one/
+            │   └── SKILL.md
+            └── skill-two/
+                └── SKILL.md
 ```
 
-## 收录技能
+### 2. marketplace.json
 
-| 技能 | 调用命令 | 描述 |
-|------|--------|------|
-| **smart-hardware-research** | `/ian-tools:smart-hardware-research` | 智能硬件产品用户调研分析专家。通过网络搜索和数据分析，深入挖掘用户对智能硬件产品的需求、痛点和讨论热点。 |
-| **mcu-debug** | `/ian-tools:mcu-debug` | MCU 项目调试助手，自动分析编译错误并提供修复方案。支持 Arduino、ESP32、STM32、SiFli (SF32) 等平台。 |
+文件路径：`my-marketplace/.claude-plugin/marketplace.json`
 
-## 开发资源
+```json
+{
+  "name": "my-marketplace",
+  "owner": { "name": "Your Name" },
+  "plugins": [
+    {
+      "name": "my-plugin",
+      "source": "./plugins/my-plugin",
+      "description": "包含两个 skills 的插件"
+    }
+  ]
+}
+```
 
-- [创建插件](https://code.claude.com/docs/zh-CN/plugins)
-- [创建市场](https://code.claude.com/docs/zh-CN/plugin-marketplaces)
-- [技能开发指南](https://code.claude.com/docs/zh-CN/skills)
+### 3. plugin.json
 
----
+文件路径：`my-marketplace/plugins/my-plugin/.claude-plugin/plugin.json`
 
-**作者：** Ian Xu
+```json
+{
+  "name": "my-plugin",
+  "version": "1.0.0",
+  "description": "包含两个 skills 的插件"
+}
+```
+
+### 4. 安装命令
+
+```bash
+/plugin marketplace add ./my-marketplace
+/plugin install my-plugin@my-marketplace
+```
+
+说明：该安装方式会把 `my-plugin` 下的全部组件一起安装（包含两个 skills）。
+
+## 教程 B：每个 Skill 一个独立插件
+
+适用场景：希望用户可以按需单独安装 `skill-one` 或 `skill-two`。
+
+### 1. 目录结构
+
+```text
+my-marketplace/
+├── .claude-plugin/
+│   └── marketplace.json
+└── plugins/
+    ├── skill-one/
+    │   ├── .claude-plugin/
+    │   │   └── plugin.json
+    │   └── skills/
+    │       └── skill-one/
+    │           └── SKILL.md
+    └── skill-two/
+        ├── .claude-plugin/
+        │   └── plugin.json
+        └── skills/
+            └── skill-two/
+                └── SKILL.md
+```
+
+### 2. marketplace.json
+
+文件路径：`my-marketplace/.claude-plugin/marketplace.json`
+
+```json
+{
+  "name": "your-marketplace",
+  "owner": { "name": "Your Name" },
+  "plugins": [
+    {
+      "name": "skill-one",
+      "source": "./plugins/skill-one"
+    },
+    {
+      "name": "skill-two",
+      "source": "./plugins/skill-two"
+    }
+  ]
+}
+```
+
+### 3. 各插件的 plugin.json
+
+`skill-one` 的 `plugin.json` 示例：
+
+```json
+{
+  "name": "skill-one",
+  "version": "1.0.0",
+  "description": "Skill One plugin"
+}
+```
+
+`skill-two` 的 `plugin.json` 示例：
+
+```json
+{
+  "name": "skill-two",
+  "version": "1.0.0",
+  "description": "Skill Two plugin"
+}
+```
+
+### 4. 安装命令
+
+```bash
+/plugin marketplace add ./my-marketplace
+/plugin install skill-one@your-marketplace
+/plugin install skill-two@your-marketplace
+```
+
+说明：Claude Code 当前是按插件安装。将每个 skill 拆成独立插件后，用户才能单独安装。
+
+## 参考文档
+
+- [创建插件市场](/zh-CN/plugin-marketplaces)
+- [插件参考](/zh-CN/plugins-reference)
+- [插件开发](/zh-CN/plugins)
