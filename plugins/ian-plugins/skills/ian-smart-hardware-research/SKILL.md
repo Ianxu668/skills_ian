@@ -1,5 +1,5 @@
 ---
-name: smart-hardware-research
+name: ian-smart-hardware-research
 description: 智能硬件产品用户调研分析专家。通过网络搜索和数据分析，深入挖掘用户对智能硬件产品的需求、痛点和讨论热点。适用于调研智能手表、智能药盒、智能家居、可穿戴设备等硬件产品。
 ---
 

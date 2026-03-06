@@ -13,10 +13,14 @@ ian-cc-plugin/
 │       ├── .claude-plugin/
 │       │   └── plugin.json             # 插件配置（插件名、版本、描述）
 │       └── skills/
-│           ├── smart-hardware-research/
+│           ├── ian-smart-hardware-research/
 │           │   └── SKILL.md            # Skill 定义
-│           └── competitive-analysis/
-│               └── SKILL.md            # Skill 定义
+│           ├── ian-competitive-analysis/
+│           │   └── SKILL.md
+│           ├── ian-competitive-single/
+│           │   └── SKILL.md
+│           └── ian-hardware-technical-analysis/
+│               └── SKILL.md
 └── README.md
 ```
 
@@ -30,7 +34,7 @@ ian-cc-plugin/
 当前仓库的配置为：
 - marketplace 名称：`ian-plugins`
 - plugin 名称：`ian-plugins`
-- 已包含 skills：`smart-hardware-research`、`competitive-analysis`
+- 已包含 skills：`ian-smart-hardware-research`、`ian-competitive-analysis`、`ian-competitive-single`、`ian-hardware-technical-analysis`
 
 ### 1. 安装
 
@@ -46,8 +50,10 @@ ian-cc-plugin/
 安装后可直接调用：
 
 ```text
-/ian-plugins:smart-hardware-research
-/ian-plugins:competitive-analysis
+/ian-plugins:ian-smart-hardware-research   # 智能硬件调研
+/ian-plugins:ian-competitive-analysis      # 竞争分析
+/ian-plugins:ian-competitive-single       # 单品竞品调研报告
+/ian-plugins:ian-hardware-technical-analysis  # 硬件技术分析
 ```
 
 ## Marketplace 教程（分开写）
