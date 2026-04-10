@@ -13,14 +13,18 @@ ian-cc-plugin/
 │       ├── .claude-plugin/
 │       │   └── plugin.json             # 插件配置（插件名、版本、描述）
 │       └── skills/
-│           ├── ian-smart-hardware-research/
-│           │   └── SKILL.md            # Skill 定义
-│           ├── ian-competitive-analysis/
+│           ├── ian-competitive-analysis/     # 竞品分析（单品/多品牌）
 │           │   └── SKILL.md
-│           ├── ian-competitive-single/
+│           ├── ian-hardware-technical-analysis/  # 整机技术分析
 │           │   └── SKILL.md
-│           └── ian-hardware-technical-analysis/
-│               └── SKILL.md
+│           ├── ian-smart-hardware-research/      # 用户调研分析
+│           │   └── SKILL.md
+│           └── ian-tech-point-analysis/          # 技术点深度解析
+│               ├── SKILL.md
+│               └── references/
+│                   ├── research-sources.md
+│                   ├── analysis-templates.md
+│                   └── visualization-guide.md
 └── README.md
 ```
 
@@ -34,7 +38,11 @@ ian-cc-plugin/
 当前仓库的配置为：
 - marketplace 名称：`ian-plugins`
 - plugin 名称：`ian-plugins`
-- 已包含 skills：`ian-smart-hardware-research`、`ian-competitive-analysis`、`ian-competitive-single`、`ian-hardware-technical-analysis`
+- 已包含 skills：
+  - `ian-competitive-analysis` - 竞品分析（单品/多品牌）
+  - `ian-hardware-technical-analysis` - 整机技术分析
+  - `ian-smart-hardware-research` - 用户调研分析
+  - `ian-tech-point-analysis` - 技术点深度解析
 
 ### 1. 安装
 
@@ -50,11 +58,13 @@ ian-cc-plugin/
 安装后可直接调用：
 
 ```text
-/ian-plugins:ian-smart-hardware-research   # 智能硬件调研
-/ian-plugins:ian-competitive-analysis      # 竞争分析
-/ian-plugins:ian-competitive-single       # 单品竞品调研报告
-/ian-plugins:ian-hardware-technical-analysis  # 硬件技术分析
+/ian-plugins:ian-competitive-analysis         # 竞品分析（单品/多品牌）
+/ian-plugins:ian-hardware-technical-analysis  # 整机技术分析
+/ian-plugins:ian-smart-hardware-research      # 用户调研分析
+/ian-plugins:ian-tech-point-analysis          # 技术点深度解析
 ```
+
+> **注意**：所有技能均需**显式调用**，不再响应关键词触发。
 
 ## Marketplace 教程（分开写）
 

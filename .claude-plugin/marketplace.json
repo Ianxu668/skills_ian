@@ -1,5 +1,6 @@
 {
   "name": "ian-plugins",
+  "version": "2.0.0",
   "owner": {
     "name": "Ian"
   },
@@ -7,7 +8,55 @@
     {
       "name": "ian-plugins",
       "source": "./plugins/ian-plugins",
-      "description": "竞争分析(competitive-analysis)、硬件产品调研分析(smart-hardware-research)、单品调研（competitive-report）"
+      "description": "智能硬件分析套件：竞品分析(competitive-analysis)、硬件技术分析(hardware-technical-analysis)、技术点深度解析(tech-point-analysis)、用户调研(smart-hardware-research)。所有技能均需显式调用。"
     }
-  ]
+  ],
+  "skills": [
+    {
+      "name": "ian-competitive-analysis",
+      "description": "消费品竞品分析技能。支持单品深度分析和多品牌对比分析。显式调用触发。",
+      "trigger": "explicit-only",
+      "output": ["markdown", "html"],
+      "style": "brutally minimal",
+      "fact-checker": "required"
+    },
+    {
+      "name": "ian-hardware-technical-analysis",
+      "description": "智能硬件整机技术分析技能。分析整机框图、运行机制、关键器件、信号链等。显式调用触发。",
+      "trigger": "explicit-only",
+      "output": ["markdown", "html", "svg"],
+      "style": "brutally minimal",
+      "fact-checker": "required"
+    },
+    {
+      "name": "ian-smart-hardware-research",
+      "description": "智能硬件产品用户调研分析技能。挖掘用户需求、痛点和讨论热点。显式调用触发。",
+      "trigger": "explicit-only",
+      "output": ["markdown", "html"],
+      "style": "brutally minimal",
+      "fact-checker": "required"
+    },
+    {
+      "name": "ian-tech-point-analysis",
+      "description": "技术点深度解析技能。针对特定技术点（传感器、算法、结构等）进行深入分析，搜集大量资料，输出专业技术报告。显式调用触发。",
+      "trigger": "explicit-only",
+      "output": ["markdown", "html", "svg"],
+      "style": "brutally minimal",
+      "fact-checker": "required"
+    }
+  ],
+  "skill-chain": {
+    "ian-competitive-analysis": {
+      "can-call": ["ian-smart-hardware-research", "ian-hardware-technical-analysis", "fact-checker", "frontend-design"]
+    },
+    "ian-hardware-technical-analysis": {
+      "can-call": ["ian-competitive-analysis", "ian-smart-hardware-research", "fact-checker", "frontend-design"]
+    },
+    "ian-smart-hardware-research": {
+      "can-call": ["ian-competitive-analysis", "ian-hardware-technical-analysis", "fact-checker", "frontend-design"]
+    },
+    "ian-tech-point-analysis": {
+      "can-call": ["ian-hardware-technical-analysis", "ian-competitive-analysis", "ian-smart-hardware-research", "fact-checker", "frontend-design"]
+    }
+  }
 }

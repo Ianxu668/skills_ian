@@ -1,0 +1,4 @@
+interface:
+  display_name: "Hardware Technical Analysis"
+  short_description: "智能硬件整机拆解、架构与技术分析"
+  default_prompt: "Use $hardware-technical-analysis to analyze a smart hardware system's block diagram, runtime flow, module responsibilities, key components, signal and power chains, and produce a Markdown source report with HTML/SVG presentation assets when needed."
